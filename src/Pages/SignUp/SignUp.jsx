@@ -9,9 +9,12 @@ const SignUp = () => {
         <title>Contest Hub | Sign-Up</title>
       </Helmet>
       <CustomLogo></CustomLogo>
-      <div className="divider divider-success"> <h1 className="font-font-rubik text-4xl md:text-4xl uppercase">
+      <div className="divider divider-success">
+        {" "}
+        <h1 className="font-font-rubik text-4xl md:text-4xl uppercase">
           Sign UP Here
-        </h1></div>
+        </h1>
+      </div>
       <div className="w-10/12 md:w-7/12 mx-auto my-5 md:mt-5">
         <form>
           <div className="flex flex-col mb-2 md:mb-5">
@@ -80,7 +83,7 @@ const SignUp = () => {
         </form>
         <div className="mt-10 flex items-center justify-between">
           <div>
-            <h1 className="font-font-robot-slab text-md">
+            <h1 className="font-font-robot-slab md:text-md">
               Old User of{" "}
               <span className="font-font-rubik tracking-widest font-bold">
                 Contest Hub
@@ -90,11 +93,18 @@ const SignUp = () => {
           </div>
           <div>
             <Link to="/login">
-              <button className="font-font-roboto-slab px-2 py-1 hover:underline text-lg font-bold hover:text-green-900 hover:duration-700 ">
+              <button className="font-font-roboto-slab px-2 py-1 underline md:text-lg font-bold text-green-900 hover:text-white hover:duration-700 ">
                 Login Here
               </button>
             </Link>
           </div>
+        </div>
+        <div className="flex justify-center mt-5">
+          <Link>
+            <button className="px-4 py-1 font-font-poppins border-2 rounded-md bg-green-900 font-bold text-white hover:border-green-900 hover:text-green-900 hover:bg-white hover:cursor-pointer hover:duration-700">
+              Sign Up With Google
+            </button>
+          </Link>
         </div>
       </div>
     </div>

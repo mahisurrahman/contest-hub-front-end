@@ -57,8 +57,15 @@ const Login = () => {
             </h1>
           </div>
           <div>
-            <Link to="/signup"><button className="font-font-roboto-slab px-2 py-1 underline font-bold text-sm hover:text-yellow-500 hover:duration-700 ">Sign Up Here</button></Link>
+            <Link to="/signup"><button className="font-font-roboto-slab px-2 py-1 underline font-bold text-sm text-yellow-500 hover:text-white hover:duration-700 ">Sign Up Here</button></Link>
           </div>
+        </div>
+        <div className="flex justify-center mt-5">
+          <Link>
+            <button className="px-4 py-1 font-font-poppins rounded-md bg-yellow-500 text-black font-bold hover:border-black hover:text-black hover:bg-white hover:cursor-pointer hover:duration-700">
+              Sign Up With Google
+            </button>
+          </Link>
         </div>
       </div>
     </div>
