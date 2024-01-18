@@ -12,7 +12,7 @@ const Login = () => {
       <div className="divider divider-warning"> <h1 className="font-font-rubik text-4xl md:text-4xl uppercase">
           Sign UP Here
         </h1></div>
-      <div className="w-10/12 md:w-6/12 mx-auto my-5 md:my-20">
+      <div className="w-10/12 md:w-7/12 mx-auto my-5 md:my-20">
         <form>
           <div className="flex flex-col">
             <label
