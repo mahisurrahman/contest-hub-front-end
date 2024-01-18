@@ -1,5 +1,4 @@
 import bannerImage from "../../assets/img4.jpg";
-import { Link } from "react-router-dom";
 import "./Banner.css";
 import { DiAndroid } from "react-icons/di";
 import { DiApple } from "react-icons/di";
@@ -9,7 +8,7 @@ import { DiGit } from "react-icons/di";
 
 const Banner = () => {
   return (
-    <div className="h-screen rounded-md mt-4">
+    <div className="rounded-md mt-4 border-2" >
       <div className="grid grid-cols-1 md:grid-cols-2 text-center md:text-left items-center justify-between">
         <div className="flex flex-col items-center md:items-start justify-center pl-2 md:pl-10 ">
           <h1 className="text-6xl md:text-8xl font-font-dancing font-bold">
