@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
+import CustomLogo from "../CustomLogo/CustomLogo";
 
 const Navbar = () => {
 
@@ -39,10 +40,7 @@ const Navbar = () => {
                 <Link to="/login"><button className="flex items-center gap-2 text-xl px-2 py-1 border text-black border-black rounded-md hover:bg-black hover:text-white hover:border-none hover:cursor-pointer hover:duration-700"><FaUserCircle className="text-xl hover:text-white hover:duration-700"></FaUserCircle>Login</button></Link>
             </ul>
           </div>
-          <div className="flex md:flex-col gap-5 md:gap-0 items-center text-center">
-            <h1 className="font-font-rubik text-3xl font-bold">Contest Hub</h1>
-            <p className="font-font-dancing font-bold">Developers Meet Innovation</p>
-          </div>
+          <CustomLogo></CustomLogo>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 font-font-poppins text-xl">
