@@ -9,7 +9,7 @@ import { DiGit } from "react-icons/di";
 const Banner = () => {
   return (
     <div className="rounded-md mt-4 border-2" >
-      <div className="grid grid-cols-1 md:grid-cols-2 text-center md:text-left items-center justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-2 text-center md:text-left items-center justify-between py-4 md:py-0 px-4 md:px-0">
         <div className="flex flex-col items-center md:items-start justify-center pl-2 md:pl-10 ">
           <h1 className="text-6xl md:text-8xl font-font-dancing font-bold">
             Hey Coders !!!{" "}
@@ -28,7 +28,7 @@ const Banner = () => {
                 Join now!!
               </button>
             </div>
-            <div className="flex items-center gap-5 mt-2">
+            <div className="flex items-center gap-5 mt-6 md:mt-2">
               <h1 className="font-font-poppins text-xl font-bold italic">
                 Socials:{" "}
               </h1>

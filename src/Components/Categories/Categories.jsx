@@ -9,7 +9,7 @@ import { TbBrandMongodb } from "react-icons/tb";
 
 const Categories = () => {
     return (
-        <div className="mt-4 border-2 rounded-lg mx-auto">
+        <div className="my-4 border-2 rounded-lg mx-auto">
              <div className="flex gap-4 md:gap-20 justify-center py-5">
                 <RiHtml5Line className="text-2xl md:text-5xl"></RiHtml5Line>
                 <TbBrandCss3 className="text-2xl md:text-5xl"></TbBrandCss3>
