@@ -3,6 +3,7 @@ import Banner from '../../Components/Banner/Banner';
 import Categories from '../../Components/Categories/Categories';
 import FeaturedContests from '../../Components/FeaturedContests/FeaturedContests';
 import AdvertiesMent from '../../Components/AdvertiseMent/AdvertiesMent';
+import TopContestCreator from '../../Components/TopContestCreator/TopContestCreator';
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             <Categories></Categories>
             <FeaturedContests></FeaturedContests>
             <AdvertiesMent></AdvertiesMent>
+            <TopContestCreator></TopContestCreator>
         </div>
     );
 };
