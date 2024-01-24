@@ -113,7 +113,7 @@ const Navbar = () => {
             User
           </button>
           {isOpen && (
-            <div className="fixed flex flex-col px-4 py-2 items-start bg-black text-white rounded-lg mt-2">
+            <div className="absolute flex flex-col px-4 py-2 items-start bg-black text-white rounded-lg mt-2">
               <Link to="/login">
                 <button className="hover:border-b-2 mb-2 font-font-poppins px-2">
                   Login
