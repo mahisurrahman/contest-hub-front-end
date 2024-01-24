@@ -30,7 +30,7 @@ const AllContests = () => {
             <h1>Bug Solvers</h1>
           </div>
         </div>
-        <div className="mt-10 rounded-lg py-4 grid grid-cols-3 gap-10">
+        <div className="mt-4 md:mt-10 rounded-lg py-4 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-10">
           <ContestsCard></ContestsCard>
           <ContestsCard></ContestsCard>
           <ContestsCard></ContestsCard>
