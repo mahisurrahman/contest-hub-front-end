@@ -1,8 +1,39 @@
 import { Helmet } from "react-helmet-async";
 import ContestsCard from "./ContestsCard";
 import { Fade } from "react-awesome-reveal";
+import CategoriesTitles from "./CategoriesTitles";
 
 const AllContests = () => {
+  const categoriesHeading = [
+    {
+      title: 'All Contests',
+    },
+    {
+      title: 'Website Designs',
+    },
+    {
+      title: 'Coding Challenges',
+    },
+    {
+      title: 'JS Challenges',
+    },
+    {
+      title: 'WordPress',
+    },
+    {
+      title: 'Full Stacker',
+    },
+    {
+      title: 'Youtube Thumbnailers',
+    },
+    {
+      title: 'Facebook Covers',
+    },
+    {
+      title: 'Bug Solvers',
+    },
+  ]
+
   return (
     <Fade cascade damping={0.1}>
       <div className="px-4 py-4 border-2 rounded-lg mt-2">
@@ -19,15 +50,9 @@ const AllContests = () => {
         </div>
         <div className="mt-4 border-2 rounded-lg px-4 py-4">
           <div className="flex gap-4 justify-between items-center text-sm font-font-poppins font-normal">
-            <h1>All Contest</h1>
-            <h1>Website Designs</h1>
-            <h1>Coding Challenges</h1>
-            <h1>JS Challenges</h1>
-            <h1>WordPress</h1>
-            <h1>Full Stacker</h1>
-            <h1>Youtube Thumbnailers</h1>
-            <h1>Facebook Covers</h1>
-            <h1>Bug Solvers</h1>
+            {
+              categoriesHeading.map(headings => <CategoriesTitles key={headings.title} title={headings.title}></CategoriesTitles>)
+            }
           </div>
         </div>
         <div className="mt-4 md:mt-10 rounded-lg py-4 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-10">

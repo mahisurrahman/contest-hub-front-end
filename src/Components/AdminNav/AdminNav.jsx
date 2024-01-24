@@ -32,6 +32,20 @@ const AdminNav = () => {
           Manage Contests
         </NavLink>
       </li>
+      <li className="list-none hover:text-green-500 text-sm my-4 border px-2 py-2 rounded-lg text-center">
+        <NavLink
+          to="/"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b-2 border-green-500 text-green-500 rounded-none"
+              : ""
+          }
+        >
+          Contest Hub (Home Page)
+        </NavLink>
+      </li>
       <div className="">
         <button className="flex justify-center w-full py-2 border-2 rounded-xl text-xl text-black bg-white font-bold hover:bg-red-300 hover:border-red-300 hover:cursor-pointer hover:duration-700">Log Out</button>
       </div>
