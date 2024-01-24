@@ -15,14 +15,14 @@ import Buttton from "../Button/Buttton";
 
 const TopContestCreator = () => {
   return (
-    <div className="border-2 rounded-lg py-5 md:py-20">
+    <div className="border-2 rounded-lg py-5 md:py-10">
       <div>
         <TitleSubTitle
           title={"Best Picks"}
           subTitle={"Of Our Contest Creators"}
         ></TitleSubTitle>
 
-        <div className="mx-2 my-2 border-2 rounded-lg px-4 py-4 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-2">
+        <div className="mx-4 my-2 border-2 rounded-lg px-4 py-4 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-2">
           <div className="flex flex-col items-center md:items-start font-font-poppins justify-center md:justify-end px-4">
             <GiCrownedSkull className="text-center text-9xl mb-5 border-2 px-2 py-2 rounded-full"></GiCrownedSkull>
             <h1 className="text-2xl font-bold uppercase">

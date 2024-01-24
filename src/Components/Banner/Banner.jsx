@@ -1,10 +1,7 @@
+
 import bannerImage from "../../assets/img4.jpg";
 import "./Banner.css";
-import { DiAndroid } from "react-icons/di";
-import { DiApple } from "react-icons/di";
-import { DiChrome } from "react-icons/di";
-import { DiCodepen } from "react-icons/di";
-import { DiGit } from "react-icons/di";
+import { FaFacebook, FaGit, FaInstagram, FaTwitch, FaTwitter } from "react-icons/fa";
 
 const Banner = () => {
   return (
@@ -33,11 +30,11 @@ const Banner = () => {
                 Socials:{" "}
               </h1>
               <div className="flex gap-4 text-3xl text-black">
-                <DiAndroid className="hover:text-gray-800 hover:duration=700"></DiAndroid>
-                <DiApple className="hover:text-gray-800 hover:duration=700"></DiApple>
-                <DiChrome className="hover:text-gray-800 hover:duration=700"></DiChrome>
-                <DiCodepen className="hover:text-gray-800 hover:duration=700"></DiCodepen>
-                <DiGit className="hover:text-gray-800 hover:duration=700"></DiGit>
+               <FaFacebook className="hover:text-gray-800 hover:duration=700"></FaFacebook>
+                <FaInstagram className="hover:text-gray-800 hover:duration=700"></FaInstagram>
+                <FaTwitter className="hover:text-gray-800 hover:duration=700"></FaTwitter>
+                <FaTwitch className="hover:text-gray-800 hover:duration=700"></FaTwitch>
+                <FaGit className="hover:text-gray-800 hover:duration=700"></FaGit>
               </div>
             </div>
             <div className="mt-2 flex items-center gap-2">

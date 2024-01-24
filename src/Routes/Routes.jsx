@@ -11,11 +11,17 @@ import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import ScrollToTop from "../Components/ScrollRestoration/ScrollToTop";
+
 
   export const router = createBrowserRouter([
     {
       path: "/",
-      element: <Main></Main>,
+      element: 
+      <>
+      <ScrollToTop></ScrollToTop>
+      <Main></Main>
+      </>,
       errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
@@ -42,8 +48,12 @@ import SignUp from "../Pages/SignUp/SignUp";
           element: <Contact></Contact>,
           errorElement: <ErrorPage></ErrorPage>,
         },
+        {
+          path:"error-page",
+          element: <ErrorPage></ErrorPage>
+        }
       ]
     },
-    { path:'/login', element:<Login></Login>, errorElement: <ErrorPage></ErrorPage>, },
-    { path:'/signup', element:<SignUp></SignUp>, errorElement: <ErrorPage></ErrorPage>, },
+    { path:'/login', element:<><ScrollToTop></ScrollToTop><Login></Login></>, errorElement: <ErrorPage></ErrorPage>, },
+    { path:'/signup', element:<><ScrollToTop></ScrollToTop><SignUp></SignUp></>, errorElement: <ErrorPage></ErrorPage>, },
   ]);

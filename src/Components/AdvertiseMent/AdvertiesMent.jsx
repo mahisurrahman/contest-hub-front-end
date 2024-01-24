@@ -6,13 +6,13 @@ import Buttton from "../Button/Buttton";
 
 const AdvertiesMent = () => {
   return (
-    <div className="my-4 px-1 py-5 md:py-20 border-2 rounded-lg mx-auto">
+    <div className="my-4 px-0 py-5 md:py-10 border-2 rounded-lg mx-auto">
       <TitleSubTitle
         title={"Hear What Our"}
         subTitle={"Top Player Says"}
       ></TitleSubTitle>
 
-      <div className="mx-4 my-2 rounded-lg py-4 px-0 md:px-4">
+      <div className="mx-0 my-2 rounded-lg py-4 px-0 md:px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 min-h-full px-4 py-4 rounded-lg border-0 md:border-2">
           <div className="col-span-4">
             <div className="grid grid-cols-2 items-center gap-10">

@@ -4,7 +4,7 @@ import TitleSubTitle from "../TitleSubtitle/TitleSubTitle";
 
 const FeaturedContests = () => {
     return (
-        <div className="min-h-screen my-4 px-4 md:px-1 py-4 md:py-1 border-2 rounded-lg mx-auto">
+        <div className="min-h-screen my-4 px-4 md:px-4 py-4 md:py-10 border-2 rounded-lg mx-auto">
             <div className="mt-10 mb-2 md:mb-10">
                 <TitleSubTitle title={'Featured Contest'} subTitle={'Our Top-Most Contest Lists'}></TitleSubTitle>
             </div>

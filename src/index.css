@@ -24,3 +24,8 @@
     background-clip: content-box;
 }
 /*Above Section is Taken from Youtube*/
+
+
+html {
+    scroll-behavior: smooth;
+}
