@@ -2,26 +2,41 @@ import { Helmet } from "react-helmet-async";
 import CustomLogo from "../../Components/CustomLogo/CustomLogo";
 import { Link } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
+import { useForm } from "react-hook-form";
+// import { useContext } from "react";
+// import { AuthContext } from "../../Providers/AuthProviders";
 
 const Login = () => {
+  // const {} = useContext(AuthContext);
+
+  // const handleSubmit = e =>{
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const email = form.email.value;
+  //   const password = form.password.value;
+  //   const user = {email, password}; 
+  //   console.log(user);
+  // }
+
+  const {register, handleSubmit, formState:{errors}} = useForm();
+
+  const onSubmit = values =>{
+    console.log(values);
+  }
   return (
     <Fade cascade damping={0.1}>
-      <Helmet>
-        <title>Contest Hub | Login</title>
-      </Helmet>
       <div className="my-10 md:my-10 py-5 md:py-10 border rounded-2xl w-full md:w-6/12 mx-auto bg-black text-white">
         <Helmet>
           <title>Contest Hub | Login</title>
         </Helmet>
         <CustomLogo></CustomLogo>
         <div className="divider divider-warning">
-          {" "}
           <h1 className="font-font-rubik text-4xl md:text-4xl uppercase">
             Sign UP Here
           </h1>
         </div>
         <div className="w-10/12 md:w-7/12 mx-auto my-5 md:my-20">
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col">
               <label
                 htmlFor="email"
@@ -34,7 +49,9 @@ const Login = () => {
                 type="email"
                 name="email"
                 placeholder="Enter Your Email"
+                {...register("email", {required:true})}
               />
+              {errors.email?.type ==='required' && <span className="text-sm text-red-600">Email is Required</span>}
             </div>
             <div className="flex flex-col mt-6">
               <label
@@ -48,7 +65,9 @@ const Login = () => {
                 type="password"
                 name="password"
                 placeholder="Enter Your Password"
+                {...register('password',{required:true})}
               />
+              {errors.password?.type === 'required'&& <span className="text-sm text-red-600">Password is Required</span>}
             </div>
             <div className="flex justify-center mt-10">
               <input
