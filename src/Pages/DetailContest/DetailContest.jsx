@@ -42,7 +42,7 @@ const DetailContest = () => {
               Attempted Participants: <span className="font-normal">{}</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
-              Contest Prize: <span className="font-normal">{}</span>
+              Contest Price: <span className="font-normal">{}</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
               Contest Winner Name: <span className="font-normal">{}</span>
