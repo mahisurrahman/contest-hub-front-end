@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import qs from 'query-string';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ const CategoriesTitles = ({title, selected}) => {
         let currentQuery = {}
         if(params){
             currentQuery = qs.parse(params.toString());
+        }
             const updatedQuery = {...currentQuery, category: title}
             const url = qs.stringifyUrl({
                 url: '/all-contests/',
@@ -15,7 +17,7 @@ const CategoriesTitles = ({title, selected}) => {
             })
 
             navigate(url);
-        }
+        
     }
 
     return (

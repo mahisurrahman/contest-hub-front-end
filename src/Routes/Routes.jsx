@@ -13,6 +13,7 @@ import AdminDash from "../Layouts/AdminDash";
 import AdminHome from "../Pages/AdminHome/AdminHome";
 import AdminManageUsers from "../Pages/AdminManageUsers/AdminManageUsers";
 import AdminManageContests from "../Pages/AdminManageContests/AdminManageContests";
+import DetailContest from "../Pages/DetailContest/DetailContest";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
         path: "error-page",
         element: <ErrorPage></ErrorPage>,
       },
+      {
+        path:"/all-contests/:id",
+        element: <DetailContest></DetailContest>,
+      }
     ],
   },
   {
@@ -117,4 +122,5 @@ export const router = createBrowserRouter([
       },
     ]
   },
+  
 ]);

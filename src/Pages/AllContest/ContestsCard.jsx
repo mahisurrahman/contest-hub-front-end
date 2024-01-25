@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import contestImage from "../../assets/img1.jpg";
 import contestCreatorImage from "../../assets/img2.jpg";
 import { VscCircleLargeFilled } from "react-icons/vsc";
 
-const ContestsCard = () => {
+const ContestsCard = ({contest}) => {
   return (
     <div className="flex flex-col items-start border-2 rounded-lg">
       <div className="py-2 px-4 flex items-center justify-between gap-4 w-full">
@@ -30,7 +31,7 @@ const ContestsCard = () => {
         </h1>
       </div>
       <div className="w-full px-4 py-2">
-        <button className="px-4 py-2 border-2 rounded-lg font-font-poppins hover:border-[#04FF10] hover:text-[#04FF10] hover:bg-black hover:cursor-pointer hover:duration-700">See Details</button>
+        <Link to={`/all-contests/${contest?._id}`}><button className="px-4 py-2 border-2 rounded-lg font-font-poppins hover:border-[#04FF10] hover:text-[#04FF10] hover:bg-black hover:cursor-pointer hover:duration-700">See Details</button></Link>
       </div>
     </div>
   );
