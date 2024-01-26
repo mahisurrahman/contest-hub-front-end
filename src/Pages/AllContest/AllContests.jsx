@@ -8,30 +8,41 @@ import { useEffect, useState } from "react";
 import NoContestCard from "../../Components/NoContestCard/NoContestCard";
 import { categoriesHeading } from "./CategoryHeading";
 import LoadingComp from "../../Components/LoadingComp/LoadingComp";
+const PAGE_SIZE = 6;
 
 const AllContests = () => {
   const [params, setParams] = useSearchParams();
   const category = params.get("category");
   const [contestsCards, setContestsCards] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  useEffect(()=>{
-    setLoading(true)
-    fetch('')
-    .then(res=>res.json())
-    .then(data=>{
-      if(category){
-        const filteredData = data.filter(dataCard =>dataCard.category === category);
-        setContestsCards(filteredData);
-      }else setContestsCards(data)
-      
-      setLoading(false);
-    })
-    .catch(err=>console.log(err));
-  },[category])
+  const [currentPage, setCurrentPage] = useState(1);
 
-  if(loading) return <LoadingComp></LoadingComp>
+  useEffect(() => {
+    setLoading(true);
+    fetch("")
+      .then((res) => res.json())
+      .then((data) => {
+        if (category) {
+          const filteredData = data.filter(
+            (dataCard) => dataCard.category === category
+          );
+          setContestsCards(filteredData);
+        } else setContestsCards(data);
 
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, [category]);
+
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+  const currentCards = contestsCards.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  if (loading) return <LoadingComp></LoadingComp>;
 
   return (
     <Fade cascade damping={0.1}>
@@ -58,22 +69,44 @@ const AllContests = () => {
             ))}
           </div>
         </div>
-        {
-          contestsCards && contestsCards.length>0 ? <div className="mt-4 md:mt-10 rounded-lg py-4 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-10">
-          {
-            contestsCards.map(contest =><ContestsCard key={contest._id} contest={contest}></ContestsCard>)
-          }
-        </div> : <NoContestCard></NoContestCard>
-        }
+        {currentCards && currentCards.length > 0 ? (
+          <div>
+          {contestsCards && contestsCards.length > 0 ? (
+            <div className="mt-4 md:mt-10 rounded-lg py-4 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-10">
+              {contestsCards.map((contest) => (
+                <ContestsCard
+                  key={contest._id}
+                  contest={contest}
+                ></ContestsCard>
+              ))}
+            </div>
+          ) : (
+            <NoContestCard></NoContestCard>
+          )}
+        </div>
+        ) : (
+          <NoContestCard></NoContestCard>
+        )}
         <div className="flex justify-center mt-4">
-          {
-            contestsCards && contestsCards.length>6 ? <div className="join">
-            <button className="join-item btn btn-active">1</button>
-            <button className="join-item btn">2</button>
-            <button className="join-item btn">3</button>
-            <button className="join-item btn">4</button>
-          </div> : <div></div>
-          }
+          {contestsCards && contestsCards.length > PAGE_SIZE ? (
+            <div className="join">
+             {[...Array(Math.ceil(contestsCards.length / PAGE_SIZE))].map(
+              (_, index) => (
+                <button
+                  key={index}
+                  className={`join-item btn ${
+                    currentPage === index + 1 ? "btn-active" : ""
+                  }`}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              )
+            )}
+          </div>
+        ) : (
+          <div></div>
+        )}
         </div>
       </div>
     </Fade>
