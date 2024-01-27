@@ -3,14 +3,14 @@ import CustomLogo from "../../Components/CustomLogo/CustomLogo";
 import { Link } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import { useForm } from "react-hook-form";
-import { imageUpload } from "../../API/utils";
-// import useAuth from "../../Hooks/UseAuth";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import axios from "axios";
+import axiosSecure from "../../API";
 
 const SignUp = () => {
-  const {createUser, updateUserInfo, googleSignIn} = useContext(AuthContext);
-  
+  const { createUser, updateUserInfo, googleSignIn } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -18,12 +18,34 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = async (values) => {
-    const email = values.email;
-    const name = values.name;
-    const password = values.password;
-    const imageData = values.photo[0];
-    const image = await imageUpload(imageData);
-    console.log(email, name, password, image.data.display_url);
+    const email = values.email; //Email Taken
+    const name = values.name; // Name Taken
+    const password = values.password; //Passowrd Taken
+    const imageData = values.photo[0]; //Image data Taken from Form
+    const formData = new FormData(); //Breaking the Image Data to Push to IMG BB
+    formData.append ("image", imageData); //Added the Image Data to the IMG BB
+    const {data} = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_API}`,
+    formData); // Pushed the Image Data to IMG BB 
+    const image = data.data.display_url; //Final Image URL is Ready
+    const userInfo = {
+      name: name, 
+      email: email, 
+      passowrd: password, 
+      userImage: image,
+      role: 'guest',
+      status: 'verified',
+    }
+    console.log(userInfo);
+    
+    // await axiosSecure.put(`/users/${userInfo?.email}`, userInfo)
+  
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+    .then(res=>{
+      console.log(res);
+    })
   };
 
   return (
@@ -149,7 +171,10 @@ const SignUp = () => {
           </div>
           <div className="flex justify-center mt-5">
             <Link>
-              <button className="px-4 py-1 font-font-poppins border-2 rounded-md bg-green-900 font-bold text-white hover:border-green-900 hover:text-green-900 hover:bg-white hover:cursor-pointer hover:duration-700">
+              <button
+                onClick={handleGoogleSignIn}
+                className="px-4 py-1 font-font-poppins border-2 rounded-md bg-green-900 font-bold text-white hover:border-green-900 hover:text-green-900 hover:bg-white hover:cursor-pointer hover:duration-700"
+              >
                 Sign Up With Google
               </button>
             </Link>
