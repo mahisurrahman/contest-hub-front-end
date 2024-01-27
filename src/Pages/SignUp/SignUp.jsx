@@ -3,13 +3,9 @@ import CustomLogo from "../../Components/CustomLogo/CustomLogo";
 import { Link } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
 import axios from "axios";
-import axiosSecure from "../../API";
 
 const SignUp = () => {
-  const { createUser, updateUserInfo, googleSignIn } = useContext(AuthContext);
 
   const {
     register,
@@ -41,12 +37,10 @@ const SignUp = () => {
   
   };
 
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-    .then(res=>{
-      console.log(res);
-    })
-  };
+  const handleGoogleSignIn = () =>{
+    
+  }
+
 
   return (
     <Fade cascade damping={0.1}>
