@@ -171,10 +171,9 @@ const Navbar = () => {
                 onClick={() => {
                   setIsOpen(!isOpen);
                 }}
-                className="flex font-bold items-center gap-2 text-md px-4 py-2 border-2 text-black border-black rounded-xl hover:bg-black hover:text-white hover:border-white hover:cursor-pointer hover:duration-700"
+                className="flex font-bold items-center gap-2 text-md px-2 py-2 text-black rounded-xl hover:border-2 hover:border-black hover:rounded-full hover:cursor-pointer hover:duration-700"
               >
-                <FaUserCircle className="text-2xl hover:text-white hover:duration-700"></FaUserCircle>
-                {user.email}
+                <img className="w-10 h-10 rounded-full object-cover" src={user.photoURL} alt="" />
               </button>
             </>
           ) : (

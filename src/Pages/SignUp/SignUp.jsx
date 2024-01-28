@@ -4,21 +4,24 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import LoadingComp from "../../Components/LoadingComp/LoadingComp";
 
 const SignUp = () => {
-  const { createUser, googleLogin, loading } = useContext(AuthContext);
+  const { createUser, googleLogin, loading, updateUserInfo } =
+    useContext(AuthContext);
+  const [authErrors, setAuthErrors] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname ||"/";
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -38,6 +41,7 @@ const SignUp = () => {
       formData
     ); // Pushed the Image Data to IMG BB
     const image = data.data.display_url; //Final Image URL is Ready
+
     const userInfo = {
       name: name,
       email: email,
@@ -46,15 +50,41 @@ const SignUp = () => {
       role: "guest",
       status: "verified",
     };
-    // console.log(userInfo);
-    createUser(userInfo.email, userInfo.password).then((res) => {
-      console.log("Created User", res.user);
-      Swal.fire("Successfully Created User");
-      axios.post("http://localhost:5000/users", userInfo);
-      navigate(from, {replace:true});
-    });
 
-    // await axiosSecure.put(`/users/${userInfo?.email}`, userInfo)
+    console.log(userInfo);
+
+    createUser(userInfo.email, userInfo.password)
+      .then(() => {
+        Swal.fire("Successfully Created User");
+        axios.post("http://localhost:5000/users", userInfo);
+        updateUserInfo(
+          userInfo.name,
+          userInfo.userImage,
+          userInfo.role,
+          userInfo.status
+        )
+          .then(() => {
+            console.log("user Profile Info Updated");
+            navigate(from, { replace: true });
+            reset();
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.message) {
+              setAuthErrors(err.message);
+            } else {
+              setAuthErrors("Unexpected Error Occured, Try Again Later");
+            }
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.message) {
+          setAuthErrors(err.message);
+        } else {
+          setAuthErrors("Unexpected Error Occured, Try Again Later");
+        }
+      });
   };
 
   const handleGoogleSignIn = () => {
@@ -62,7 +92,7 @@ const SignUp = () => {
       if (loading) {
         return <LoadingComp></LoadingComp>;
       }
-      navigate(from, {replace:true});
+      navigate(from, { replace: true });
       Swal.fire("Successfully Logged In");
     });
   };
@@ -169,6 +199,9 @@ const SignUp = () => {
                 className="px-10 py-2 border-2 border-dotted rounded-md font-font-rubik text-xl tracking-widest font-bold uppercase border-black hover:bg-black hover:text-white hover:cursor-pointer hover:duration-700"
               />
             </div>
+            {authErrors && (
+              <div className="text-sm text-red-700 mb-2">{authErrors}</div>
+            )}
           </form>
           <div className="mt-10 flex items-center justify-between">
             <div>
