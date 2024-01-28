@@ -14,6 +14,7 @@ import AdminHome from "../Pages/AdminHome/AdminHome";
 import AdminManageUsers from "../Pages/AdminManageUsers/AdminManageUsers";
 import AdminManageContests from "../Pages/AdminManageContests/AdminManageContests";
 import DetailContest from "../Pages/DetailContest/DetailContest";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -56,7 +57,7 @@ export const router = createBrowserRouter([
       },
       {
         path:"/all-contests/:id",
-        element: <DetailContest></DetailContest>,
+        element: <PrivateRoutes><DetailContest></DetailContest></PrivateRoutes>,
       }
     ],
   },
@@ -85,7 +86,7 @@ export const router = createBrowserRouter([
     element: (
       <>
         <ScrollToTop></ScrollToTop>
-        <AdminDash></AdminDash>
+       <PrivateRoutes><AdminDash></AdminDash></PrivateRoutes>
       </>
     ),
     errorElement: <ErrorPage></ErrorPage>,
@@ -95,7 +96,7 @@ export const router = createBrowserRouter([
         element: (
           <>
             <ScrollToTop></ScrollToTop>,
-            <AdminHome></AdminHome>,
+           <PrivateRoutes> <AdminHome></AdminHome></PrivateRoutes>
           </>
         ),
         errorElement: <ErrorPage></ErrorPage>,
@@ -105,7 +106,7 @@ export const router = createBrowserRouter([
         element:(
           <>
             <ScrollToTop></ScrollToTop>,
-            <AdminManageUsers></AdminManageUsers>,
+            <PrivateRoutes><AdminManageUsers></AdminManageUsers>,</PrivateRoutes>
           </>
         ),
         errorElement: <ErrorPage></ErrorPage>
@@ -115,10 +116,10 @@ export const router = createBrowserRouter([
         element:(
           <>
             <ScrollToTop></ScrollToTop>,
-            <AdminManageContests></AdminManageContests>
+           <PrivateRoutes> <AdminManageContests></AdminManageContests></PrivateRoutes>
           </>
         ),
-        errorElement: <ErrorPage></ErrorPage>
+        errorElement:<ErrorPage></ErrorPage>
       },
     ]
   },

@@ -15,73 +15,73 @@ const Footer = () => {
       <footer className="bg-black grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-4 px-2 md:px-4 py-5">
         <div className="flex flex-col items-start font-font-poppins">
           <header className="footer-title text-[#04FF10]">Contests</header>
-          <a className="flex items-center gap-2 link link-hover text-sm leading-6">
+          <Link className="flex items-center gap-2 link link-hover text-sm leading-6">
             <MdControlPoint />
             Website Designs
-          </a>
-          <a className="flex items-center gap-2 link link-hover text-sm leading-6">
+          </Link>
+          <Link className="flex items-center gap-2 link link-hover text-sm leading-6">
             <MdControlPoint />
             Coding Challenge
-          </a>
-          <a className="flex items-center gap-2 link link-hover text-sm leading-6">
+          </Link>
+          <Link className="flex items-center gap-2 link link-hover text-sm leading-6">
             <MdControlPoint />
             Javascript Challenges
-          </a>
-          <a className="flex items-center gap-2 link link-hover text-sm leading-6">
+          </Link>
+          <Link className="flex items-center gap-2 link link-hover text-sm leading-6">
             <MdControlPoint />
             WordPress Enthusiasts
-          </a>
-          <a className="flex items-center gap-2 link link-hover text-sm leading-6">
+          </Link>
+          <Link className="flex items-center gap-2 link link-hover text-sm leading-6">
             <MdControlPoint />
             Full Stack Developer
-          </a>
-          <a className="flex items-center gap-2 link link-hover text-sm leading-6">
+          </Link>
+          <Link className="flex items-center gap-2 link link-hover text-sm leading-6">
             <MdControlPoint />
             Youtube Thumbnailers
-          </a>
-          <a className="flex items-center gap-2 link link-hover text-sm leading-6">
+          </Link>
+          <Link className="flex items-center gap-2 link link-hover text-sm leading-6">
             <MdControlPoint />
             Facebook Cover Stylists
-          </a>
-          <a className="flex items-center gap-2 link link-hover text-sm leading-6">
+          </Link>
+          <Link className="flex items-center gap-2 link link-hover text-sm leading-6">
             <MdControlPoint />
             Bug Solvers
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col items-start font-font-poppins">
           <header className="footer-title text-[#04FF10]">Navigations</header>
           <Link to="/">
-            <a className="link link-hover">Home</a>
+            <Link className="link link-hover">Home</Link>
           </Link>
           <Link to="about">
-            <a className="link link-hover">About us</a>
+            <Link className="link link-hover">About us</Link>
           </Link>
           <Link to="contact">
-            <a className="link link-hover">Contact</a>
+            <Link className="link link-hover">Contact</Link>
           </Link>
           <Link to="blog">
-            <a className="link link-hover">Blog</a>
+            <Link className="link link-hover">Blog</Link>
           </Link>
           <Link to="all-contests">
-            <a className="link link-hover">All Contests</a>
+            <Link className="link link-hover">All Contests</Link>
           </Link>
           <Link to="/login">
-            <a className="link link-hover">Login</a>
+            <Link className="link link-hover">Login</Link>
           </Link>
           <Link to="/signup">
-            <a className="link link-hover">Sign-Up</a>
+            <Link className="link link-hover">Sign-Up</Link>
           </Link>
         </div>
         <div className="hidden md:flex flex-col items-start font-font-poppins">
           <header className="footer-title text-[#04FF10]">Legal</header>
           <Link to="error-page">
-            <a className="link link-hover">Terms of use</a>
+            <Link className="link link-hover">Terms of use</Link>
           </Link>
           <Link to="error-page">
-            <a className="link link-hover">Privacy policy</a>
+            <Link className="link link-hover">Privacy policy</Link>
           </Link>
           <Link to="error-page">
-            <a className="link link-hover">Cookie policy</a>
+            <Link className="link link-hover">Cookie policy</Link>
           </Link>
         </div>
         <div className="flex flex-col items-center">

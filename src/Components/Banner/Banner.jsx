@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import bannerImage from "../../assets/img4.jpg";
 import "./Banner.css";
 import {
@@ -35,23 +36,23 @@ const Banner = () => {
               Socials:{" "}
             </h1>
             <div className="flex gap-4 text-3xl text-black">
-              <a href="https://www.facebook.com/mdrahman5833/">
+              <Link to="https://www.facebook.com/mdrahman5833/">
                 <FaFacebook className="hover:text-gray-800 hover:duration=700"></FaFacebook>
-              </a>
-              <a href="https://www.instagram.com/mahisurrahman/">
+              </Link>
+              <Link to="https://www.instagram.com/mahisurrahman/">
                 <FaInstagram className="hover:text-gray-800 hover:duration=700"></FaInstagram>
-              </a>
-              <a href="https://twitter.com/">
+              </Link>
+              <Link to="https://twitter.com/">
                 {" "}
                 <FaTwitter className="hover:text-gray-800 hover:duration=700"></FaTwitter>
-              </a>
-              <a href="https://www.twitch.tv/">
+              </Link>
+              <Link to="https://www.twitch.tv/">
                 <FaTwitch className="hover:text-gray-800 hover:duration=700"></FaTwitch>
-              </a>
-              <a href="https://github.com/mahisurrahman">
+              </Link>
+              <Link to="https://github.com/mahisurrahman">
                 {" "}
                 <FaGit className="hover:text-gray-800 hover:duration=700"></FaGit>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="mt-2 flex items-center gap-2">

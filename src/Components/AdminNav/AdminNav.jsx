@@ -1,8 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
 import adminImage from "../../assets/img6.jpg";
 import CustomLogo from "../CustomLogo/CustomLogo";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const AdminNav = () => {
+  const {logOut} = useContext(AuthContext);
+
+  const handleLogOut = () =>{
+    logOut(res=>{
+      console.log(res);
+    })
+  }
+  
   const links = (
     <>
       <li className="list-none hover:text-green-500 text-lg my-4 border px-2 py-1 rounded-lg text-center">
@@ -48,7 +58,7 @@ const AdminNav = () => {
         </NavLink>
       </li>
       <div className="">
-        <button className="flex justify-center w-full py-2 border-2 rounded-xl text-xl text-black bg-white font-bold hover:bg-red-300 hover:border-red-300 hover:cursor-pointer hover:duration-700">Log Out</button>
+        <button onClick={handleLogOut} className="flex justify-center w-full py-2 border-2 rounded-xl text-xl text-black bg-white font-bold hover:bg-red-300 hover:border-red-300 hover:cursor-pointer hover:duration-700">Log Out</button>
       </div>
     </>
   );

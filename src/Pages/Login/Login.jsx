@@ -1,28 +1,45 @@
 import { Helmet } from "react-helmet-async";
 import CustomLogo from "../../Components/CustomLogo/CustomLogo";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import LoadingComp from "../../Components/LoadingComp/LoadingComp";
 // import { useContext } from "react";
 // import { AuthContext } from "../../Providers/AuthProviders";
 
 const Login = () => {
-  // const {} = useContext(AuthContext);
-
-  // const handleSubmit = e =>{
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
-  //   const user = {email, password}; 
-  //   console.log(user);
-  // }
-
   const {register, handleSubmit, formState:{errors}} = useForm();
+  const {logInUser, googleLogin, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const onSubmit = values =>{
-    console.log(values);
+  const from = location.state?.from?.pathname ||"/";
+
+  if(loading){
+    return <LoadingComp></LoadingComp>
   }
+  const onSubmit = values =>{
+    const email = values.email;
+    const password = values.password;
+    logInUser(email, password)
+    .then(() =>{
+      navigate(from, {replace: true});
+      Swal.fire('Successfully Logged in');
+    })
+  };
+
+  const handleGoogleSignIn = ()=>{
+    googleLogin()
+    .then(()=>{
+      navigate(from, {replace: true});
+      Swal.fire('Successfully Logged In');
+    })
+  };
+
+
   return (
     <Fade cascade damping={0.1}>
       <div className="my-10 md:my-10 py-5 md:py-10 border rounded-2xl w-full md:w-6/12 mx-auto bg-black text-white">
@@ -97,7 +114,7 @@ const Login = () => {
           </div>
           <div className="flex justify-center mt-5">
             <Link>
-              <button className="px-4 py-1 font-font-poppins rounded-md bg-yellow-500 text-black font-bold hover:border-black hover:text-black hover:bg-white hover:cursor-pointer hover:duration-700">
+              <button onClick={handleGoogleSignIn} className="px-4 py-1 font-font-poppins rounded-md bg-yellow-500 text-black font-bold hover:border-black hover:text-black hover:bg-white hover:cursor-pointer hover:duration-700">
                 Sign Up With Google
               </button>
             </Link>

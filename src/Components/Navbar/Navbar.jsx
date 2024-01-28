@@ -1,10 +1,14 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import CustomLogo from "../CustomLogo/CustomLogo";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const links = (
     <>
@@ -12,7 +16,11 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "border-b-2 border-black rounded-none" : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b-2 border-black rounded-none"
+              : ""
           }
         >
           Home
@@ -22,7 +30,11 @@ const Navbar = () => {
         <NavLink
           to="all-contests"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "border-b-2 border-black rounded-none" : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b-2 border-black rounded-none"
+              : ""
           }
         >
           Contests
@@ -32,7 +44,11 @@ const Navbar = () => {
         <NavLink
           to="blog"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "border-b-2 border-black rounded-none" : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b-2 border-black rounded-none"
+              : ""
           }
         >
           Blog
@@ -42,7 +58,11 @@ const Navbar = () => {
         <NavLink
           to="about"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "border-b-2 border-black rounded-none" : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b-2 border-black rounded-none"
+              : ""
           }
         >
           About
@@ -52,12 +72,54 @@ const Navbar = () => {
         <NavLink
           to="contact"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "border-b-2 border-black rounded-none" : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b-2 border-black rounded-none"
+              : ""
           }
         >
           Contact
         </NavLink>
       </li>
+    </>
+  );
+
+  const handleLogOut = () => {
+    logOut().then(() => {
+      navigate("/");
+      Swal.fire("Successfully Logged Out");
+    });
+  };
+
+  const authButtons = user ? (
+    <>
+      <Link to="/user-dashboard">
+        <button className="hover:border-b-2 mb-2 font-font-poppins px-2">
+          Dashboard
+        </button>
+      </Link>
+      <Link to="">
+        <button
+          onClick={handleLogOut}
+          className="hover:border-b-2 font-font-poppins px-2"
+        >
+          Logout
+        </button>
+      </Link>
+    </>
+  ) : (
+    <>
+      <Link to="/login">
+        <button className="hover:border-b-2 mb-2 font-font-poppins px-2">
+          Login
+        </button>
+      </Link>
+      <Link to="/signup">
+        <button className="hover:border-b-2 font-font-poppins px-2">
+          Sign Up
+        </button>
+      </Link>
     </>
   );
 
@@ -103,27 +165,34 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="hidden md:block">
-          <button
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-            className="flex font-bold items-center gap-2 text-md px-4 py-2 border-2 text-black border-black rounded-xl hover:bg-black hover:text-white hover:border-white hover:cursor-pointer hover:duration-700"
-          >
-            <FaUserCircle className="text-2xl hover:text-white hover:duration-700"></FaUserCircle>
-            User
-          </button>
+          {user ? (
+            <>
+              <button
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+                className="flex font-bold items-center gap-2 text-md px-4 py-2 border-2 text-black border-black rounded-xl hover:bg-black hover:text-white hover:border-white hover:cursor-pointer hover:duration-700"
+              >
+                <FaUserCircle className="text-2xl hover:text-white hover:duration-700"></FaUserCircle>
+                {user.email}
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+                className="flex font-bold items-center gap-2 text-md px-4 py-2 border-2 text-black border-black rounded-xl hover:bg-black hover:text-white hover:border-white hover:cursor-pointer hover:duration-700"
+              >
+                <FaUserCircle className="text-2xl hover:text-white hover:duration-700"></FaUserCircle>
+                User
+              </button>
+            </>
+          )}
           {isOpen && (
             <div className="absolute flex flex-col px-4 py-2 items-start bg-black text-white rounded-lg mt-2">
-              <Link to="/login">
-                <button className="hover:border-b-2 mb-2 font-font-poppins px-2">
-                  Login
-                </button>
-              </Link>
-              <Link to="/signup">
-                <button className="hover:border-b-2 font-font-poppins px-2">
-                  Sign Up
-                </button>
-              </Link>
+              {authButtons}
             </div>
           )}
         </div>

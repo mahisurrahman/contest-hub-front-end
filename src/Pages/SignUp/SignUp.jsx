@@ -1,11 +1,20 @@
 import { Helmet } from "react-helmet-async";
 import CustomLogo from "../../Components/CustomLogo/CustomLogo";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import LoadingComp from "../../Components/LoadingComp/LoadingComp";
 
 const SignUp = () => {
+  const { createUser, googleLogin, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname ||"/";
 
   const {
     register,
@@ -13,34 +22,50 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
+  if (loading) {
+    return <LoadingComp></LoadingComp>;
+  }
+
   const onSubmit = async (values) => {
     const email = values.email; //Email Taken
     const name = values.name; // Name Taken
     const password = values.password; //Passowrd Taken
     const imageData = values.photo[0]; //Image data Taken from Form
     const formData = new FormData(); //Breaking the Image Data to Push to IMG BB
-    formData.append ("image", imageData); //Added the Image Data to the IMG BB
-    const {data} = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_API}`,
-    formData); // Pushed the Image Data to IMG BB 
+    formData.append("image", imageData); //Added the Image Data to the IMG BB
+    const { data } = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_API}`,
+      formData
+    ); // Pushed the Image Data to IMG BB
     const image = data.data.display_url; //Final Image URL is Ready
     const userInfo = {
-      name: name, 
-      email: email, 
-      passowrd: password, 
+      name: name,
+      email: email,
+      password: password,
       userImage: image,
-      role: 'guest',
-      status: 'verified',
-    }
-    console.log(userInfo);
-    
+      role: "guest",
+      status: "verified",
+    };
+    // console.log(userInfo);
+    createUser(userInfo.email, userInfo.password).then((res) => {
+      console.log("Created User", res.user);
+      Swal.fire("Successfully Created User");
+      axios.post("http://localhost:5000/users", userInfo);
+      navigate(from, {replace:true});
+    });
+
     // await axiosSecure.put(`/users/${userInfo?.email}`, userInfo)
-  
   };
 
-  const handleGoogleSignIn = () =>{
-    
-  }
-
+  const handleGoogleSignIn = () => {
+    googleLogin().then(() => {
+      if (loading) {
+        return <LoadingComp></LoadingComp>;
+      }
+      navigate(from, {replace:true});
+      Swal.fire("Successfully Logged In");
+    });
+  };
 
   return (
     <Fade cascade damping={0.1}>
