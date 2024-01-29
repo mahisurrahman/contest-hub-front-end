@@ -1,10 +1,11 @@
-import axios from "axios";
+
 import { useContext } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
+import axiosSecure from "../../API";
 
 const AddContest = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const AddContest = () => {
       contestDetails,
     }
     // console.log(contestInfo);
-    axios.post('http://localhost:5000/contests', contestInfo)
+    axiosSecure.post('/contests', contestInfo)
     .then(res=>{
       console.log(res);
       if(res.data.insertedId){

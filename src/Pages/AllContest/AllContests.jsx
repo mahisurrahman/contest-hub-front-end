@@ -9,6 +9,7 @@ import NoContestCard from "../../Components/NoContestCard/NoContestCard";
 import { categoriesHeading } from "./CategoryHeading";
 import LoadingComp from "../../Components/LoadingComp/LoadingComp";
 import axios from "axios";
+import axiosSecure from "../../API";
 const PAGE_SIZE = 6;
 
 const AllContests = () => {
@@ -20,21 +21,15 @@ const AllContests = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:5000/contests', {
-      method: 'GET',
-      // headers: {
-      //   'content-type': 'application/json',
-      // },
-      // body: JSON.stringify()
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    axiosSecure.get('/contests')
+      .then((response) => {
+        const contestResult = response.data;
         if (category) {
-          const filteredData = data.filter(
+          const filteredData = contestResult.filter(
             (dataCard) => dataCard.category === category
           );
           setContestsCards(filteredData);
-        } else setContestsCards(data);
+        } else setContestsCards(contestResult);
 
         setLoading(false);
       })

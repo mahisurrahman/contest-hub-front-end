@@ -8,6 +8,9 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import LoadingComp from "../../Components/LoadingComp/LoadingComp";
+import axiosSecure from "../../API";
+import { getToken } from "../../API/auth";
+
 
 const SignUp = () => {
   const { createUser, googleLogin, loading, updateUserInfo } =
@@ -55,16 +58,17 @@ const SignUp = () => {
 
     createUser(userInfo.email, userInfo.password)
       .then(() => {
-        Swal.fire("Successfully Created User");
-        axios.post("http://localhost:5000/users", userInfo);
         updateUserInfo(
           userInfo.name,
           userInfo.userImage,
         )
           .then(() => {
             console.log("user Profile Info Updated");
-            navigate(from, { replace: true });
+            axiosSecure.post('/users', userInfo);
+            getToken(userInfo?.email)
             reset();
+            Swal.fire("Successfully Created User");
+            navigate(from, { replace: true });
           })
           .catch((err) => {
             console.log(err);
