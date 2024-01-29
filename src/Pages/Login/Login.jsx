@@ -6,7 +6,9 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-import LoadingComp from "../../Components/LoadingComp/LoadingComp";
+import { TbFidgetSpinner } from "react-icons/tb";
+import axiosSecure from "../../API";
+import { getToken } from "../../API/auth";
 // import { useContext } from "react";
 // import { AuthContext } from "../../Providers/AuthProviders";
 
@@ -18,9 +20,9 @@ const Login = () => {
 
   const from = location.state?.from?.pathname ||"/";
 
-  if(loading){
-    return <LoadingComp></LoadingComp>
-  }
+  // if(loading){
+  //   return <LoadingComp></LoadingComp>
+  // }
   const onSubmit = values =>{
     const email = values.email;
     const password = values.password;
@@ -31,12 +33,18 @@ const Login = () => {
     })
   };
 
-  const handleGoogleSignIn = ()=>{
-    googleLogin()
-    .then(()=>{
+  const handleGoogleSignIn = async ()=>{
+    try{
+      googleLogin()
+    .then((result)=>{
+      axiosSecure.post('/users', result?.user);
+      getToken(result?.user?.email);
       navigate(from, {replace: true});
       Swal.fire('Successfully Logged In');
     })
+    }catch(err){
+      console.log(err);
+    }
   };
 
 
@@ -87,11 +95,10 @@ const Login = () => {
               {errors.password?.type === 'required'&& <span className="text-sm text-red-600">Password is Required</span>}
             </div>
             <div className="flex justify-center mt-10">
-              <input
+              <button
                 type="submit"
-                value="Login"
                 className="px-10 py-2 border-2 border-dotted rounded-md font-font-rubik text-xl tracking-widest font-bold uppercase hover:bg-white hover:text-black hover:cursor-pointer hover:duration-700"
-              />
+              >{loading ? <TbFidgetSpinner className="animate-spin m-auto"></TbFidgetSpinner> : "Login"}</button>
             </div>
           </form>
           <div className="mt-10 flex items-center justify-between">

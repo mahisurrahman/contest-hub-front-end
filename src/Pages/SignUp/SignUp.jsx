@@ -7,9 +7,9 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-import LoadingComp from "../../Components/LoadingComp/LoadingComp";
 import axiosSecure from "../../API";
 import { getToken } from "../../API/auth";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 
 const SignUp = () => {
@@ -28,9 +28,9 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  if (loading) {
-    return <LoadingComp></LoadingComp>;
-  }
+  // if (loading) {
+  //   return <LoadingComp></LoadingComp>;
+  // }
 
   const onSubmit = async (values) => {
     const email = values.email; //Email Taken
@@ -89,14 +89,18 @@ const SignUp = () => {
       });
   };
 
-  const handleGoogleSignIn = () => {
-    googleLogin().then(() => {
-      if (loading) {
-        return <LoadingComp></LoadingComp>;
-      }
-      navigate(from, { replace: true });
-      Swal.fire("Successfully Logged In");
-    });
+  const handleGoogleSignIn = async ()=>{
+    try{
+      googleLogin()
+    .then((result)=>{
+      axiosSecure.post('/users', result?.user);
+      getToken(result?.user?.email);
+      navigate(from, {replace: true});
+      Swal.fire('Successfully Logged In');
+    })
+    }catch(err){
+      console.log(err);
+    }
   };
 
   return (
@@ -195,11 +199,10 @@ const SignUp = () => {
               )}
             </div>
             <div className="flex justify-center mt-10">
-              <input
+              <button
                 type="submit"
-                value="Sign Up"
                 className="px-10 py-2 border-2 border-dotted rounded-md font-font-rubik text-xl tracking-widest font-bold uppercase border-black hover:bg-black hover:text-white hover:cursor-pointer hover:duration-700"
-              />
+              >{loading ? <TbFidgetSpinner className="animate-spin m-auto"></TbFidgetSpinner> : "Sign-Up"}</button>
             </div>
             {authErrors && (
               <div className="text-sm text-red-700 mb-2">{authErrors}</div>
