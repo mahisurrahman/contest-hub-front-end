@@ -94,7 +94,7 @@ const Navbar = () => {
 
   const authButtons = user ? (
     <>
-      <Link to="/user-dashboard">
+      <Link to="/user">
         <button className="hover:border-b-2 mb-2 font-font-poppins px-2">
           Dashboard
         </button>
@@ -174,6 +174,7 @@ const Navbar = () => {
                 className="flex font-bold items-center gap-2 text-md px-2 py-2 text-black rounded-xl hover:border-2 hover:border-black hover:rounded-full hover:cursor-pointer hover:duration-700"
               >
                 <img className="w-10 h-10 rounded-full object-cover" src={user.photoURL} alt="" />
+                <sup>0</sup>
               </button>
             </>
           ) : (

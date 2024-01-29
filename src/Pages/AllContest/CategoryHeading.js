@@ -3,7 +3,7 @@ export const categoriesHeading = [
       title: "All-Contests",
     },
     {
-      title: "Web-Designs",
+      title: "Front-End-Experts",
     },
     {
       title: "Coding-Challenges",

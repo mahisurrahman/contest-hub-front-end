@@ -36,10 +36,10 @@ const AuthProvider = ({children}) => {
     }
 
     //Update User'S dETAILS//
-    const updateUserInfo = (name, photo, role, status)=>{
+    const updateUserInfo = (name, photo)=>{
         setLoading(true);
         return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo, role, status
+            displayName: name, photoURL: photo,
           });
     }
 

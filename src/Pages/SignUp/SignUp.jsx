@@ -60,8 +60,6 @@ const SignUp = () => {
         updateUserInfo(
           userInfo.name,
           userInfo.userImage,
-          userInfo.role,
-          userInfo.status
         )
           .then(() => {
             console.log("user Profile Info Updated");

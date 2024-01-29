@@ -4,7 +4,7 @@ import CustomLogo from "../CustomLogo/CustomLogo";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
-const UserNav = () => {
+const ContestCreatorNav = () => {
   const {user, logOut} = useContext(AuthContext);
 
   const handleLogOut = () =>{
@@ -17,7 +17,7 @@ const UserNav = () => {
     <>
       <li className="list-none hover:text-green-500 text-lg my-4 border px-2 py-1 rounded-lg text-center">
         <NavLink
-          to="/user/my-winning-contest"
+          to="/contest-creator/add-contest"
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
@@ -26,12 +26,12 @@ const UserNav = () => {
               : ""
           }
         >
-          My Winning Contest
+          Add Contest
         </NavLink>
       </li>
       <li className="list-none hover:text-green-500 text-lg my-4 border px-2 py-1 rounded-lg text-center">
         <NavLink
-          to="/user/my-participated-contest"
+          to="/contest-creator/created-contest"
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
@@ -40,7 +40,21 @@ const UserNav = () => {
               : ""
           }
         >
-          My Participated Contest
+          Created Contest
+        </NavLink>
+      </li>
+      <li className="list-none hover:text-green-500 text-lg my-4 border px-2 py-1 rounded-lg text-center">
+        <NavLink
+          to="/contest-creator/contest-submitted"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b-2 border-green-500 text-green-500 rounded-none"
+              : ""
+          }
+        >
+          Contest Submitted
         </NavLink>
       </li>
       <li className="list-none hover:text-green-500 text-sm my-4 border px-2 py-2 rounded-lg text-center">
@@ -84,4 +98,4 @@ const UserNav = () => {
   );
 };
 
-export default UserNav;
+export default ContestCreatorNav;

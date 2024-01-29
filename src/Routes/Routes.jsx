@@ -15,6 +15,15 @@ import AdminManageUsers from "../Pages/AdminManageUsers/AdminManageUsers";
 import AdminManageContests from "../Pages/AdminManageContests/AdminManageContests";
 import DetailContest from "../Pages/DetailContest/DetailContest";
 import PrivateRoutes from "./PrivateRoutes";
+import UserDash from "../Layouts/UserDash";
+import UserHome from "../Pages/UserHome/UserHome";
+import UserManageContests from "../Pages/UserManageContests/UserManageContests";
+import UserParticipatedContest from "../Pages/UserParticipatedContest/UserParticipatedContest";
+import ContestCreatorDash from "../Layouts/ContestCreatorDash";
+import ContestCreatorHome from "../Pages/ContestCreatorHome/ContestCreatorHome";
+import AddContest from "../Components/AddContest/AddContest";
+import CreatedContest from "../Components/CreatedContest/CreatedContest";
+import ContestSubmitted from "../Components/ContestSubmitted/ContestSubmitted";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +70,7 @@ export const router = createBrowserRouter([
       }
     ],
   },
+
   {
     path: "/login",
     element: (
@@ -70,7 +80,7 @@ export const router = createBrowserRouter([
       </>
     ),
     errorElement: <ErrorPage></ErrorPage>,
-  },
+  }, //Login
   {
     path: "/signup",
     element: (
@@ -80,7 +90,8 @@ export const router = createBrowserRouter([
       </>
     ),
     errorElement: <ErrorPage></ErrorPage>,
-  },
+  }, //SignUp
+
   {
     path: "/admin",
     element: (
@@ -122,6 +133,100 @@ export const router = createBrowserRouter([
         errorElement:<ErrorPage></ErrorPage>
       },
     ]
-  },
+  }, //Admin Dash
+  {
+    path: "/user",
+    element: (
+      <>
+        <ScrollToTop></ScrollToTop>
+       <PrivateRoutes><UserDash></UserDash></PrivateRoutes>
+      </>
+    ),
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path:"/user",
+        element: (
+          <>
+          <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><UserHome></UserHome></PrivateRoutes>
+          </>
+        ),
+        errorElement: <ErrorPage></ErrorPage>,
+      },
+      {
+        path: "/user/my-winning-contest",
+        element:(
+          <>
+            <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><UserManageContests></UserManageContests></PrivateRoutes>
+          </>
+        ),
+        errorElement:<ErrorPage></ErrorPage>,
+      },
+      {
+        path: "/user/my-participated-contest",
+        element:(
+          <>
+            <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><UserParticipatedContest></UserParticipatedContest></PrivateRoutes>
+          </>
+        ),
+        errorElement:<ErrorPage></ErrorPage>,
+      },
+    ]
+  }, //Users Dash
+  {
+    path: "/contest-creator",
+    element: (
+      <>
+        <ScrollToTop></ScrollToTop>
+       <PrivateRoutes><ContestCreatorDash></ContestCreatorDash></PrivateRoutes>
+      </>
+    ),
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path:"/contest-creator",
+        element: (
+          <>
+          <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><ContestCreatorHome></ContestCreatorHome></PrivateRoutes>
+          </>
+        ),
+        errorElement: <ErrorPage></ErrorPage>,
+      },
+      {
+        path: "/contest-creator/add-contest",
+        element:(
+          <>
+            <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><AddContest></AddContest></PrivateRoutes>
+          </>
+        ),
+        errorElement:<ErrorPage></ErrorPage>,
+      },
+      {
+        path: "/contest-creator/created-contest",
+        element:(
+          <>
+            <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><CreatedContest></CreatedContest></PrivateRoutes>
+          </>
+        ),
+        errorElement:<ErrorPage></ErrorPage>,
+      },
+      {
+        path: "/contest-creator/contest-submitted",
+        element:(
+          <>
+            <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><ContestSubmitted></ContestSubmitted></PrivateRoutes>
+          </>
+        ),
+        errorElement:<ErrorPage></ErrorPage>,
+      },
+    ]
+  },//Creator's Dash
   
 ]);
