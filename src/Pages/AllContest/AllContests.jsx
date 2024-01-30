@@ -90,7 +90,7 @@ const AllContests = () => {
                 </div>
               </TabPanel>
               <TabPanel>
-              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
                   {codingChallenges.map((contests) => (
                     <ContestsCard
                       key={contests._id}
@@ -110,7 +110,7 @@ const AllContests = () => {
                 </div>
               </TabPanel>
               <TabPanel>
-              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
                   {wordpress.map((contests) => (
                     <ContestsCard
                       key={contests._id}
@@ -120,7 +120,7 @@ const AllContests = () => {
                 </div>
               </TabPanel>
               <TabPanel>
-              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
                   {fullStacker.map((contests) => (
                     <ContestsCard
                       key={contests._id}
@@ -130,7 +130,7 @@ const AllContests = () => {
                 </div>
               </TabPanel>
               <TabPanel>
-              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
                   {youtubeThumbnailers.map((contests) => (
                     <ContestsCard
                       key={contests._id}
@@ -140,7 +140,7 @@ const AllContests = () => {
                 </div>
               </TabPanel>
               <TabPanel>
-              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
                   {facebookCovers.map((contests) => (
                     <ContestsCard
                       key={contests._id}
@@ -150,7 +150,7 @@ const AllContests = () => {
                 </div>
               </TabPanel>
               <TabPanel>
-              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
                   {bugSolvers.map((contests) => (
                     <ContestsCard
                       key={contests._id}

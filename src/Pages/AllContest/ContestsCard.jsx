@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import contestCreatorImage from "../../assets/img2.jpg";
 import { VscCircleLargeFilled } from "react-icons/vsc";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const ContestsCard = ({ contests }) => {
+  const {user} = useContext(AuthContext);
   const truncateText = (text, limit) => {
     const words = text.split(" ");
     return (
@@ -14,7 +16,7 @@ const ContestsCard = ({ contests }) => {
     <div className="flex flex-col items-start border-2 rounded-lg">
       <div className="py-2 px-4 flex items-center justify-between gap-4 w-full">
         <div className="flex gap-2 items-center">
-          <img src={contestCreatorImage} className="w-14 rounded-full" alt="" />
+          <img src={contests?.creatorPhoto} className="w-14 rounded-full" alt="" />
           <div className="font-font-poppins">
             <h1 className="text-xl">{contests?.contestName}</h1>
             <h1 className="text-sm">{contests?.creatorName}</h1>

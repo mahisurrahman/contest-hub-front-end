@@ -23,9 +23,11 @@ const AddContest = () => {
     const contestDetails = form.contestDetails.value || null;
     const creatorName = user.displayName;
     const creatorEmail = user.email;
+    const creatorPhoto = user.photoURL;
 
     const contestInfo = {
       creatorEmail,
+      creatorPhoto,
       creatorName,
       contestName,
       contestCategory,
