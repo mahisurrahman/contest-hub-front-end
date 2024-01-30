@@ -3,14 +3,12 @@ import CustomLogo from "../../Components/CustomLogo/CustomLogo";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import axiosSecure from "../../API";
 import { getToken } from "../../API/auth";
 import { TbFidgetSpinner } from "react-icons/tb";
-
 
 const SignUp = () => {
   const { createUser, googleLogin, loading, updateUserInfo } =
@@ -36,14 +34,15 @@ const SignUp = () => {
     const email = values.email; //Email Taken
     const name = values.name; // Name Taken
     const password = values.password; //Passowrd Taken
-    const imageData = values.photo[0]; //Image data Taken from Form
-    const formData = new FormData(); //Breaking the Image Data to Push to IMG BB
-    formData.append("image", imageData); //Added the Image Data to the IMG BB
-    const { data } = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_API}`,
-      formData
-    ); // Pushed the Image Data to IMG BB
-    const image = data.data.display_url; //Final Image URL is Ready
+    const image = values.photo;//Image Taken
+    // const imageData = values.photo[0]; //Image data Taken from Form
+    // const formData = new FormData(); //Breaking the Image Data to Push to IMG BB
+    // formData.append("image", imageData); //Added the Image Data to the IMG BB
+    // const { data } = await axios.post(
+    //   `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_API}`,
+    //   formData
+    // ); // Pushed the Image Data to IMG BB
+    // const image = data.data.display_url; //Final Image URL is Ready
 
     const userInfo = {
       name: name,
@@ -89,16 +88,15 @@ const SignUp = () => {
       });
   };
 
-  const handleGoogleSignIn = async ()=>{
-    try{
-      googleLogin()
-    .then((result)=>{
-      axiosSecure.post('/users', result?.user);
-      getToken(result?.user?.email);
-      navigate(from, {replace: true});
-      Swal.fire('Successfully Logged In');
-    })
-    }catch(err){
+  const handleGoogleSignIn = async () => {
+    try {
+      googleLogin().then((result) => {
+        axiosSecure.post("/users", result?.user);
+        getToken(result?.user?.email);
+        navigate(from, { replace: true });
+        Swal.fire("Successfully Logged In");
+      });
+    } catch (err) {
       console.log(err);
     }
   };
@@ -144,11 +142,10 @@ const SignUp = () => {
                 Photo
               </label>
               <input
-                className="bg-white font-font-poppins  border-black  py-1 rounded-md placeholder:font-font-dancing placeholder:text-md placeholder:tracking-widest placeholder:font-bold"
-                type="file"
-                id="image"
+                className="bg-white font-font-poppins border-2 border-black px-4 py-1 rounded-md placeholder:font-font-dancing placeholder:text-md placeholder:tracking-widest placeholder:font-bold"
+                type="text"
                 name="photo"
-                accept="image/*"
+                placeholder="Enter Your Photo URL"
                 {...register("photo", { required: true })}
               />
               {errors.photo?.type === "required" && (
@@ -199,10 +196,10 @@ const SignUp = () => {
               )}
             </div>
             <div className="flex justify-center mt-10">
-              <button
+            <button
                 type="submit"
-                className="px-10 py-2 border-2 border-dotted rounded-md font-font-rubik text-xl tracking-widest font-bold uppercase border-black hover:bg-black hover:text-white hover:cursor-pointer hover:duration-700"
-              >{loading ? <TbFidgetSpinner className="animate-spin m-auto"></TbFidgetSpinner> : "Sign-Up"}</button>
+                className="px-10 py-2 border-2 border-dotted rounded-md font-font-rubik text-xl tracking-widest font-bold uppercase hover:bg-white hover:text-black hover:cursor-pointer hover:duration-700"
+              >{loading ? <TbFidgetSpinner className="animate-spin m-auto"></TbFidgetSpinner> : "Login"}</button>
             </div>
             {authErrors && (
               <div className="text-sm text-red-700 mb-2">{authErrors}</div>

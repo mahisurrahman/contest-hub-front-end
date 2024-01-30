@@ -19,7 +19,6 @@ const AllContests = () => {
       setLoading(false);
     });
   }, []);
-
   const frontEndExpert = allContests.filter(
     (item) => item.contestCategory === "Front-End-Experts"
   );

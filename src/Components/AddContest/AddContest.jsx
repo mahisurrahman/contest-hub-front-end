@@ -90,6 +90,7 @@ const AddContest = () => {
                   </option>
                   <option value="Facebook-Covers">Facebook Covers</option>
                   <option value="Bug-Solvers">Bug Solvers</option>
+                  <option value="Popular">Popular</option>
                 </select>
               </div>
               <div className="my-2">
