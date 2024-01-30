@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import { VscCircleLargeFilled } from "react-icons/vsc";
-import { useContext } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
 
 const ContestsCard = ({ contests }) => {
-  const {user} = useContext(AuthContext);
   const truncateText = (text, limit) => {
     const words = text.split(" ");
     return (

@@ -24,6 +24,7 @@ import ContestCreatorHome from "../Pages/ContestCreatorHome/ContestCreatorHome";
 import AddContest from "../Components/AddContest/AddContest";
 import CreatedContest from "../Components/CreatedContest/CreatedContest";
 import ContestSubmitted from "../Components/ContestSubmitted/ContestSubmitted";
+import axiosSecure from "../API";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +68,7 @@ export const router = createBrowserRouter([
       {
         path:"/all-contests/:id",
         element: <PrivateRoutes><DetailContest></DetailContest></PrivateRoutes>,
+        loader: ({params})=> axiosSecure.get(`/contests/${params.id}`)
       }
     ],
   },

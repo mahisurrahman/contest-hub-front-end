@@ -7,21 +7,21 @@ import LoadingComp from "../../Components/LoadingComp/LoadingComp";
 import { Helmet } from "react-helmet-async";
 
 const DetailContest = () => {
-    const contestDetails = useLoaderData();
+    const contestss = useLoaderData();
     const [loading, setLoading] = useState(false);
-    const [specificContest, setSpecficContest] = useState({})
+    const contestDetails = contestss.data;
 
-    useEffect(()=>{
-        setLoading(true);
-        fetch('')
-        .then(res=>res.json())
-        .then(data=>{
-            const singleContest = data.find(contest => contest._id === contestDetails._id);
-            setSpecficContest(singleContest);
-            setLoading(false);
-        })
-        .catch(err=> console.log(err));
-    },[contestDetails])
+    // useEffect(()=>{
+    //     setLoading(true);
+    //     fetch('')
+    //     .then(res=>res.json())
+    //     .then(data=>{
+    //         const singleContest = data.find(contest => contest._id === contestDetails._id);
+    //         setSpecficContest(singleContest);
+    //         setLoading(false);
+    //     })
+    //     .catch(err=> console.log(err));
+    // },[contestDetails])
 
     if(loading) return <LoadingComp></LoadingComp>
   return (
@@ -33,33 +33,33 @@ const DetailContest = () => {
         <div className="px-10 py-10 font-font-poppins border-2 w-full h-full rounded-lg flex flex-col items-start justify-center">
           <div className="py-2 w-full border-l-2 pl-2 border-black">
             <h1 className="mb-4 text-md font-bold uppercase">
-              Contest Title: <span className="font-normal">{}</span>
+              Contest Title: <span className="font-normal">{contestDetails.contestName}</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
-              Contest Creator Name: <span className="font-normal">{}</span>
+              Contest Creator Name: <span className="font-normal">{contestDetails.creatorName}</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
-              Attempted Participants: <span className="font-normal">{}</span>
+              Attempted Participants: <span className="font-normal">0</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
-              Contest Price: <span className="font-normal">{}</span>
+              Contest Price: <span className="font-normal">{contestDetails.contestCost}</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
-              Contest Winner Name: <span className="font-normal">{}</span>
+              Contest Winner Name: <span className="font-normal">{contestDetails.winnerName ? contestDetails.winnerName : "No One"}</span>
             </h1>
             <div>
             <h1 className="mb-4 text-md font-bold uppercase">Winner Image: </h1>
               <img
-                src={contestDetailsImage}
+                src={contestDetails.winnerImage ? contestDetails.winnerImage : "Null"}
                 className="w-20 h-20 rounded-full"
                 alt=""
               />
             </div>
             <h1 className="my-4 text-md font-bold uppercase">
-              Contest Deadline: <span className="font-normal">{}</span>
+              Contest Deadline: <span className="font-normal">{contestDetails.contestDeadline}</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
-              Contest Description: <span className="font-normal">{}</span>
+              Contest Description: <span className="font-normal">{contestDetails.contestDetails}</span>
             </h1>
             <div>
                 <Link><Buttton title={'Register'}></Buttton></Link>
@@ -69,7 +69,7 @@ const DetailContest = () => {
         <div>
           <div className="w-full">
             <img
-              src={contestDetailsImage}
+              src={contestDetails.contestPhoto}
               className="w-full h-full rounded-lg object-cover object-center"
               alt=""
             />
