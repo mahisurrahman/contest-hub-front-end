@@ -4,11 +4,13 @@ import CustomLogo from "../CustomLogo/CustomLogo";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import UseCart from "../../Hooks/UseCart";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [cart] = UseCart();
 
   const links = (
     <>
@@ -174,7 +176,7 @@ const Navbar = () => {
                 className="flex font-bold items-center gap-2 text-md px-2 py-2 text-black rounded-xl hover:border-2 hover:border-black hover:rounded-full hover:cursor-pointer hover:duration-700"
               >
                 <img className="w-10 h-10 rounded-full object-cover" src={user.photoURL} alt="" />
-                <sup>0</sup>
+                <sup>{cart.length>0 ? cart.length : '0'}</sup>
               </button>
             </>
           ) : (

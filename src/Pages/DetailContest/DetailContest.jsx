@@ -1,15 +1,22 @@
 /* eslint-disable no-unused-vars */
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import contestDetailsImage from "../../assets/img2.jpg";
 import Buttton from "../../Components/Button/Buttton";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LoadingComp from "../../Components/LoadingComp/LoadingComp";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import axiosSecure from "../../API";
+import UseCart from "../../Hooks/UseCart";
 
 const DetailContest = () => {
+    const {user} = useContext(AuthContext);
     const contestss = useLoaderData();
     const [loading, setLoading] = useState(false);
     const contestDetails = contestss.data;
+    const navigate = useNavigate();
+    const [,refetch] = UseCart();
 
     // useEffect(()=>{
     //     setLoading(true);
@@ -23,8 +30,26 @@ const DetailContest = () => {
     //     .catch(err=> console.log(err));
     // },[contestDetails])
 
-    const handleRegister = () =>{
-
+    const handleRegister = (contestDetails) =>{
+        if(user && user.email){
+          const cartItem = {
+            cartContestID: contestDetails._id,
+            cartUserEmail: user.email,
+          }
+          axiosSecure.post('/carts', cartItem)
+          .then(res=>{
+            console.log(res.data);
+            Swal.fire(`Successfully Registered the ${contestDetails.contestName}`);
+            refetch();
+            navigate('/all-contests');
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
+        }else{
+          Swal.fire('Please Login');
+          navigate('/login');
+        }
     }
 
     if(loading) return <LoadingComp></LoadingComp>
@@ -63,7 +88,7 @@ const DetailContest = () => {
               Contest Description: <span className="font-normal">{contestDetails.contestDetails}</span>
             </h1>
             <div>
-                <button onClick={handleRegister} className="px-4 py-2 border-2 rounded-lg border-black text-black bg-white hover:text-white hover:border-white hover:bg-black hover:cursor-pointer hover:duration-700 font-bold">Register</button>
+                <button onClick={()=>handleRegister(contestDetails)} className="px-4 py-2 border-2 rounded-lg border-black text-black bg-white hover:text-white hover:border-white hover:bg-black hover:cursor-pointer hover:duration-700 font-bold">Register</button>
             </div>
           </div>
         </div>

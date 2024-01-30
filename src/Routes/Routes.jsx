@@ -25,6 +25,7 @@ import AddContest from "../Components/AddContest/AddContest";
 import CreatedContest from "../Components/CreatedContest/CreatedContest";
 import ContestSubmitted from "../Components/ContestSubmitted/ContestSubmitted";
 import axiosSecure from "../API";
+import UserRegisteredContest from "../Pages/UserRegisteredContest/UserRegisteredContest";
 
 export const router = createBrowserRouter([
   {
@@ -172,6 +173,16 @@ export const router = createBrowserRouter([
           <>
             <ScrollToTop></ScrollToTop>,
            <PrivateRoutes><UserParticipatedContest></UserParticipatedContest></PrivateRoutes>
+          </>
+        ),
+        errorElement:<ErrorPage></ErrorPage>,
+      },
+      {
+        path: "/user/my-registered-contest",
+        element:(
+          <>
+            <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><UserRegisteredContest></UserRegisteredContest></PrivateRoutes>
           </>
         ),
         errorElement:<ErrorPage></ErrorPage>,
