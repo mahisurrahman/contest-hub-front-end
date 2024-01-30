@@ -23,6 +23,10 @@ const DetailContest = () => {
     //     .catch(err=> console.log(err));
     // },[contestDetails])
 
+    const handleRegister = () =>{
+
+    }
+
     if(loading) return <LoadingComp></LoadingComp>
   return (
     <div className="min-h-screen border-2 rounded-lg my-4">
@@ -36,21 +40,18 @@ const DetailContest = () => {
               Contest Title: <span className="font-normal">{contestDetails.contestName}</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
-              Contest Creator Name: <span className="font-normal">{contestDetails.creatorName}</span>
-            </h1>
-            <h1 className="mb-4 text-md font-bold uppercase">
               Attempted Participants: <span className="font-normal">0</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
               Contest Price: <span className="font-normal">{contestDetails.contestCost}</span>
             </h1>
             <h1 className="mb-4 text-md font-bold uppercase">
-              Contest Winner Name: <span className="font-normal">{contestDetails.winnerName ? contestDetails.winnerName : "No One"}</span>
+              Contest Creator Name: <span className="font-normal">{contestDetails.creatorName ? contestDetails.creatorName : "No One"}</span>
             </h1>
             <div>
-            <h1 className="mb-4 text-md font-bold uppercase">Winner Image: </h1>
+            <h1 className="mb-4 text-md font-bold uppercase">Creator Image: </h1>
               <img
-                src={contestDetails.winnerImage ? contestDetails.winnerImage : "Null"}
+                src={contestDetails.creatorPhoto ? contestDetails.creatorPhoto : "Null"}
                 className="w-20 h-20 rounded-full"
                 alt=""
               />
@@ -62,7 +63,7 @@ const DetailContest = () => {
               Contest Description: <span className="font-normal">{contestDetails.contestDetails}</span>
             </h1>
             <div>
-                <Link><Buttton title={'Register'}></Buttton></Link>
+                <button onClick={handleRegister} className="px-4 py-2 border-2 rounded-lg border-black text-black bg-white hover:text-white hover:border-white hover:bg-black hover:cursor-pointer hover:duration-700 font-bold">Register</button>
             </div>
           </div>
         </div>
