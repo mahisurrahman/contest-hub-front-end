@@ -28,6 +28,7 @@ const Login = () => {
     const password = values.password;
     logInUser(email, password)
     .then(() =>{
+      getToken(email);
       navigate(from, {replace: true});
       Swal.fire('Successfully Logged in');
     })

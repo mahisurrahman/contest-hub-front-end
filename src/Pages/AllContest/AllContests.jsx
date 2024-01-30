@@ -1,114 +1,166 @@
-/* eslint-disable no-unused-vars */
-import { Helmet } from "react-helmet-async";
-import ContestsCard from "./ContestsCard";
-import { Fade } from "react-awesome-reveal";
-import CategoriesTitles from "./CategoriesTitles";
-import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import NoContestCard from "../../Components/NoContestCard/NoContestCard";
-import { categoriesHeading } from "./CategoryHeading";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import LoadingComp from "../../Components/LoadingComp/LoadingComp";
-import axios from "axios";
+import { Fade } from "react-awesome-reveal";
+import { Helmet } from "react-helmet-async";
+
 import axiosSecure from "../../API";
-const PAGE_SIZE = 6;
+import { useEffect, useState } from "react";
+import ContestsCard from "./ContestsCard";
 
 const AllContests = () => {
-  const [params, setParams] = useSearchParams();
-  const category = params.get("category");
-  const [contestsCards, setContestsCards] = useState([]);
+  const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [allContests, setAllContests] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-    axiosSecure.get('/contests')
-      .then((response) => {
-        const contestResult = response.data;
-        if (category) {
-          const filteredData = contestResult.filter(
-            (dataCard) => dataCard.category === category
-          );
-          setContestsCards(filteredData);
-        } else setContestsCards(contestResult);
+    axiosSecure.get("/contests").then((res) => {
+      setAllContests(res.data);
+      setLoading(false);
+    });
+  }, []);
 
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
-  }, [category]);
-
-  const startIndex = (currentPage - 1) * PAGE_SIZE;
-  const endIndex = startIndex + PAGE_SIZE;
-  const currentCards = contestsCards.slice(startIndex, endIndex);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  const frontEndExpert = allContests.filter(
+    (item) => item.contestCategory === "Front-End-Experts"
+  );
+  const codingChallenges = allContests.filter(
+    (item) => item.contestCategory === "Coding-Challenges"
+  );
+  const jsChallenges = allContests.filter(
+    (item) => item.contestCategory === "JS-Challenges"
+  );
+  const wordpress = allContests.filter(
+    (item) => item.contestCategory === "WordPress"
+  );
+  const fullStacker = allContests.filter(
+    (item) => item.contestCategory === "Full-Stacker"
+  );
+  const youtubeThumbnailers = allContests.filter(
+    (item) => item.contestCategory === "Youtube-Thumbnailers"
+  );
+  const facebookCovers = allContests.filter(
+    (item) => item.contestCategory === "Facebook-Covers"
+  );
+  const bugSolvers = allContests.filter(
+    (item) => item.contestCategory === "Bug-Solvers"
+  );
 
   if (loading) return <LoadingComp></LoadingComp>;
-
   return (
     <Fade cascade damping={0.1}>
       <div className="px-2 md:px-4 py-4 border-2 rounded-lg mt-2">
         <Helmet>
           <title>Contest Hub | Contests</title>
         </Helmet>
-        <div className="flex flex-col items-center w-10/12 md:w-6/12 mx-auto text-center mt-4">
-          <h1 className="font-font-rubik text-3xl md:text-7xl uppercase">
-            Oye Coder?
-          </h1>
-          <p className="font-font-dancing text-xl md:text-4xl">
-            Dont Dodge Any Constests !!! Okay?
-          </p>
-        </div>
-        <div className="mt-4 border-2 rounded-lg px-4 py-4">
-          <div className="text-gray-600 flex gap-4 justify-between items-center text-xs md:text-sm font-font-poppins font-normal overflow-x-auto">
-            {categoriesHeading.map((headings) => (
-              <CategoriesTitles
-                key={headings.title}
-                title={headings.title}
-                selected={category === headings.title}
-              ></CategoriesTitles>
-            ))}
-          </div>
-        </div>
-        {currentCards && currentCards.length > 0 ? (
-          <div>
-          {contestsCards && contestsCards.length > 0 ? (
-            <div className="mt-4 md:mt-10 rounded-lg py-4 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-10">
-              {contestsCards.map((contest) => (
-                <ContestsCard
-                  key={contest._id}
-                  contest={contest}
-                ></ContestsCard>
-              ))}
+        <div>
+          <Tabs
+            defaultIndex={tabIndex}
+            onSelect={(index) => setTabIndex(index)}
+          >
+            <TabList className="font-font-poppins font-semibold text-[12px] overflow-x-auto">
+              <Tab>All-Contest</Tab>
+              <Tab>Front-End-Experts</Tab>
+              <Tab>Coding-Challenges</Tab>
+              <Tab>JS-Challenges</Tab>
+              <Tab>WordPress</Tab>
+              <Tab>Full-Stacker</Tab>
+              <Tab>Youtube-Thumbnailers</Tab>
+              <Tab>Facebook-Covers</Tab>
+              <Tab>Bug-Solvers</Tab>
+            </TabList>
+            <div className="mt-10 border-2 rounded-lg px-4 py-4">
+              <TabPanel>
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {allContests.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {frontEndExpert.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {codingChallenges.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {jsChallenges.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {wordpress.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {fullStacker.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {youtubeThumbnailers.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {facebookCovers.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+              <div className="grid grid-cols-3 gap-5 px-4 py-2">
+                  {bugSolvers.map((contests) => (
+                    <ContestsCard
+                      key={contests._id}
+                      contests={contests}
+                    ></ContestsCard>
+                  ))}
+                </div>
+              </TabPanel>
             </div>
-          ) : (
-            <NoContestCard></NoContestCard>
-          )}
-        </div>
-        ) : (
-          <NoContestCard></NoContestCard>
-        )}
-        <div className="flex justify-center mt-4">
-          {contestsCards && contestsCards.length > PAGE_SIZE ? (
-            <div className="join">
-             {[...Array(Math.ceil(contestsCards.length / PAGE_SIZE))].map(
-              (_, index) => (
-                <button
-                  key={index}
-                  className={`join-item btn ${
-                    currentPage === index + 1 ? "btn-active" : ""
-                  }`}
-                  onClick={() => handlePageChange(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              )
-            )}
-          </div>
-        ) : (
-          <div></div>
-        )}
+          </Tabs>
         </div>
       </div>
     </Fade>

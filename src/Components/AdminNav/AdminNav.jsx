@@ -1,14 +1,17 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import adminImage from "../../assets/img6.jpg";
 import CustomLogo from "../CustomLogo/CustomLogo";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
+
 const AdminNav = () => {
   const {logOut} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogOut = () =>{
     logOut(res=>{
+      navigate('/')
       console.log(res);
     })
   }
