@@ -32,20 +32,6 @@ const UserNav = () => {
           My Winning Contest
         </NavLink>
       </li>
-      <li className="list-none hover:text-green-500 text-md my-4 border px-2 py-1 rounded-lg text-center">
-        <NavLink
-          to="/user/my-participated-contest"
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-              ? "border-b-2 border-green-500 text-green-500 rounded-none"
-              : ""
-          }
-        >
-          My Participated Contest
-        </NavLink>
-      </li>
       <li className="list-none hover:text-green-500 text-lg my-4 border px-2 py-1 rounded-lg text-center">
         <NavLink
           to="/user/my-registered-contest"

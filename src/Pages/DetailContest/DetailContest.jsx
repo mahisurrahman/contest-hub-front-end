@@ -16,7 +16,7 @@ const DetailContest = () => {
     const [loading, setLoading] = useState(false);
     const contestDetails = contestss.data;
     const navigate = useNavigate();
-    const [,refetch] = UseCart();
+    const [cart,refetch] = UseCart();
 
     // useEffect(()=>{
     //     setLoading(true);
@@ -31,25 +31,36 @@ const DetailContest = () => {
     // },[contestDetails])
 
     const handleRegister = (contestDetails) =>{
-        if(user && user.email){
-          const cartItem = {
-            cartContestID: contestDetails._id,
-            cartUserEmail: user.email,
-          }
-          axiosSecure.post('/carts', cartItem)
-          .then(res=>{
-            console.log(res.data);
-            Swal.fire(`Successfully Registered the ${contestDetails.contestName}`);
-            refetch();
-            navigate('/all-contests');
-          })
-          .catch((err)=>{
-            console.log(err);
-          })
-        }else{
-          Swal.fire('Please Login');
-          navigate('/login');
+      if(user && user.email){
+        const cartItem = {
+          cartContestID: contestDetails._id,
+          cartUserEmail: user.email,
+          cartUserName: user.displayName,
+          cartUserPhoto: user.photoURL,
+          contestCreatorName: contestDetails.creatorName,
+          contestCreatorEmail: contestDetails.creatorEmail, 
+          contestName: contestDetails.contestName,
+          contestCategory: contestDetails.contestCategory,
+          contestCost: contestDetails.contestCost,
+          contestWinningPrize: contestDetails.contestWinningPrize,
+          contestPhoto: contestDetails.contestPhoto,
+          contestDeadline: contestDetails.contestDeadline,
+          contestDetails: contestDetails.contestDetails,
         }
+        axiosSecure.post('/carts', cartItem)
+        .then(res=>{
+          console.log(res.data);
+          Swal.fire(`Successfully Registered the ${contestDetails.contestName}`);
+          navigate('/all-contests');
+          refetch();
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }else{
+        Swal.fire('Please Login');
+        navigate('/login');
+      }
     }
 
     if(loading) return <LoadingComp></LoadingComp>

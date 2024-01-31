@@ -31,9 +31,6 @@ const UserHome = () => {
             <h1 className="font-bold text-xl ">
               Win Percentage : <span className="font-light"> 0%</span>
             </h1>
-            <h1 className="font-bold text-xl ">
-              Participated in Contest : <span className="font-light"> 0%</span>
-            </h1>
           </div>
           <div>
             <img className="w-40" src={user.photoURL} alt="" />

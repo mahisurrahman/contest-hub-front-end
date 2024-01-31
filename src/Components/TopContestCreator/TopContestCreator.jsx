@@ -34,10 +34,12 @@ const TopContestCreator = () => {
               selecting deserving winners judiciously.
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <img className="rounded-full" src={user.photoURL} />
-            <h1 className="text-2xl font-bold mt-5">{user.displayName}</h1>
-          </div>
+          {
+            user ? <div className="flex flex-col items-center justify-center">
+            <img className="rounded-full" src={user.photoURL ? user.photoURL : 'null' } />
+            <h1 className="text-2xl font-bold mt-5">{user?.displayName}</h1>
+          </div> : <div className="flex justify-center items-center"><h1 className="text-2xl font-bold font-font-poppins px-4 py-2 border-2 rounded-lg">No Top Contest Creator Yet</h1></div>
+          }
           <div className="flex flex-col items-center md:items-end text-right font-font-poppins justify-center md:justify-end px-4">
             <h1 className="uppercase text-2xl font-bold">
               You Wanna Be A <br /> Contest Creator Too?

@@ -47,20 +47,6 @@ const ContestCreatorNav = () => {
           Created Contest
         </NavLink>
       </li>
-      <li className="list-none hover:text-green-500 text-lg my-4 border px-2 py-1 rounded-lg text-center">
-        <NavLink
-          to="/contest-creator/contest-submitted"
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-              ? "border-b-2 border-green-500 text-green-500 rounded-none"
-              : ""
-          }
-        >
-          Contest Submitted
-        </NavLink>
-      </li>
       <li className="list-none hover:text-green-500 text-sm my-4 border px-2 py-2 rounded-lg text-center">
         <NavLink
           to="/"

@@ -198,8 +198,8 @@ const SignUp = () => {
             <div className="flex justify-center mt-10">
             <button
                 type="submit"
-                className="px-10 py-2 border-2 border-dotted rounded-md font-font-rubik text-xl tracking-widest font-bold uppercase hover:bg-white hover:text-black hover:cursor-pointer hover:duration-700"
-              >{loading ? <TbFidgetSpinner className="animate-spin m-auto"></TbFidgetSpinner> : "Login"}</button>
+                className="px-10 py-2 border-2 border-dotted rounded-md font-font-rubik text-xl tracking-widest font-bold uppercase hover:cursor-pointer hover:duration-700 border-black hover:bg-black hover:text-white hover:border-white"
+              >{loading ? <TbFidgetSpinner className="animate-spin m-auto"></TbFidgetSpinner> : "Sign Up"}</button>
             </div>
             {authErrors && (
               <div className="text-sm text-red-700 mb-2">{authErrors}</div>

@@ -18,12 +18,10 @@ import PrivateRoutes from "./PrivateRoutes";
 import UserDash from "../Layouts/UserDash";
 import UserHome from "../Pages/UserHome/UserHome";
 import UserManageContests from "../Pages/UserManageContests/UserManageContests";
-import UserParticipatedContest from "../Pages/UserParticipatedContest/UserParticipatedContest";
 import ContestCreatorDash from "../Layouts/ContestCreatorDash";
 import ContestCreatorHome from "../Pages/ContestCreatorHome/ContestCreatorHome";
 import AddContest from "../Components/AddContest/AddContest";
 import CreatedContest from "../Components/CreatedContest/CreatedContest";
-import ContestSubmitted from "../Components/ContestSubmitted/ContestSubmitted";
 import axiosSecure from "../API";
 import UserRegisteredContest from "../Pages/UserRegisteredContest/UserRegisteredContest";
 
@@ -168,16 +166,6 @@ export const router = createBrowserRouter([
         errorElement:<ErrorPage></ErrorPage>,
       },
       {
-        path: "/user/my-participated-contest",
-        element:(
-          <>
-            <ScrollToTop></ScrollToTop>,
-           <PrivateRoutes><UserParticipatedContest></UserParticipatedContest></PrivateRoutes>
-          </>
-        ),
-        errorElement:<ErrorPage></ErrorPage>,
-      },
-      {
         path: "/user/my-registered-contest",
         element:(
           <>
@@ -225,16 +213,6 @@ export const router = createBrowserRouter([
           <>
             <ScrollToTop></ScrollToTop>,
            <PrivateRoutes><CreatedContest></CreatedContest></PrivateRoutes>
-          </>
-        ),
-        errorElement:<ErrorPage></ErrorPage>,
-      },
-      {
-        path: "/contest-creator/contest-submitted",
-        element:(
-          <>
-            <ScrollToTop></ScrollToTop>,
-           <PrivateRoutes><ContestSubmitted></ContestSubmitted></PrivateRoutes>
           </>
         ),
         errorElement:<ErrorPage></ErrorPage>,
