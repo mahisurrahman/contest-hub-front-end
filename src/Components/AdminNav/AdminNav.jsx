@@ -34,6 +34,20 @@ const AdminNav = () => {
       </li>
       <li className="list-none hover:text-green-500 text-lg my-4 border px-2 py-1 rounded-lg text-center">
         <NavLink
+          to="/admin/add-contest"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b-2 border-green-500 text-green-500 rounded-none"
+              : ""
+          }
+        >
+          Add Contests
+        </NavLink>
+      </li>
+      <li className="list-none hover:text-green-500 text-lg my-4 border px-2 py-1 rounded-lg text-center">
+        <NavLink
           to="/admin/manage-contests"
           className={({ isActive, isPending }) =>
             isPending

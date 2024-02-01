@@ -85,12 +85,6 @@ const DetailContest = () => {
               Contest Creator Name: <span className="font-normal">{contestDetails.creatorName ? contestDetails.creatorName : "No One"}</span>
             </h1>
             <div>
-            <h1 className="mb-4 text-md font-bold uppercase">Creator Image: </h1>
-              <img
-                src={contestDetails.creatorPhoto ? contestDetails.creatorPhoto : "Null"}
-                className="w-20 h-20 rounded-full"
-                alt=""
-              />
             </div>
             <h1 className="my-4 text-md font-bold uppercase">
               Contest Deadline: <span className="font-normal">{contestDetails.contestDeadline}</span>

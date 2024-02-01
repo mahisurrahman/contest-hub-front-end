@@ -32,7 +32,7 @@ const UserManageContests = () => {
                 </thead>
                 <tbody>
                   {/* row 1 */}
-                  <tr>
+                  {/* <tr>
                     <td>
                       <div className="flex items-center gap-3">
                         <div>
@@ -57,7 +57,7 @@ const UserManageContests = () => {
                         Contest Details
                       </button>
                     </th>
-                  </tr>
+                  </tr> */}
                 </tbody>
               </table>
             </div>

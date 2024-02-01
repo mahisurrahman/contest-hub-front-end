@@ -3,10 +3,38 @@ import { Fade } from "react-awesome-reveal";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Providers/AuthProvider";
 import UseCart from "../../Hooks/UseCart";
+import Swal from "sweetalert2";
+import axiosSecure from "../../API";
+import { Link } from "react-router-dom";
 
 const UserRegisteredContest = () => {
   const { user } = useContext(AuthContext);
-  const [cart] = UseCart();
+  const [cart, refetch] = UseCart();
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        })
+      }
+    });
+  };
 
   return (
     <>
@@ -18,7 +46,10 @@ const UserRegisteredContest = () => {
           <h1 className="text-2xl font-bold underline uppercase tracking-widest">
             Registered Contest List
           </h1>
-          <div className="mt-10 px-4 py-2 border-2 rounded-lg border-white ">
+          <div className="mt-10">
+            <Link to="/all-contests"><button className="px-4 py-2 rounded-lg text-white font-font-poppins font-bold tracking-widest bg-blue-500 hover:bg-green-500 hover:text-black hover:cursor-pointer hover:duration-700">Add Contest</button></Link>
+          </div>
+          <div className="mt-2 px-4 py-2 border-2 rounded-lg border-white ">
             <div className="overflow-x-auto ">
               <table className="table">
                 {/* head */}
@@ -72,7 +103,10 @@ const UserRegisteredContest = () => {
                           <button className="bg-green-500 px-2 py-1 rounded-lg text-black hover:bg-white hover:cursor-pointer hover:duration-700">
                             Confirm
                           </button>
-                          <button className="bg-red-500 px-2 py-1 rounded-lg text-black hover:bg-white hover:cursor-pointer hover:duration-700">
+                          <button
+                            onClick={() => handleDelete(item._id)}
+                            className="bg-red-500 px-2 py-1 rounded-lg text-black hover:bg-white hover:cursor-pointer hover:duration-700"
+                          >
                             Remove
                           </button>
                         </div>

@@ -133,6 +133,16 @@ export const router = createBrowserRouter([
         ),
         errorElement:<ErrorPage></ErrorPage>
       },
+      {
+        path: "/admin/add-contest",
+        element:(
+          <>
+            <ScrollToTop></ScrollToTop>,
+           <PrivateRoutes><AddContest></AddContest></PrivateRoutes>
+          </>
+        ),
+        errorElement:<ErrorPage></ErrorPage>,
+      },
     ]
   }, //Admin Dash
   {
@@ -196,16 +206,6 @@ export const router = createBrowserRouter([
           </>
         ),
         errorElement: <ErrorPage></ErrorPage>,
-      },
-      {
-        path: "/contest-creator/add-contest",
-        element:(
-          <>
-            <ScrollToTop></ScrollToTop>,
-           <PrivateRoutes><AddContest></AddContest></PrivateRoutes>
-          </>
-        ),
-        errorElement:<ErrorPage></ErrorPage>,
       },
       {
         path: "/contest-creator/created-contest",

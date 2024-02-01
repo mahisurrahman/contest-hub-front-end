@@ -6,7 +6,7 @@ const AdminDash = () => {
   return (
     <Fade cascade damping={0.1}>
       <div>
-        <div className="grid grid-cols-12 gap-2 min-h-screen">
+        <div className="grid grid-cols-12 gap-2 min-h-screen bg-black pr-10">
           <div className="col-span-3">
             <AdminNav></AdminNav>
           </div>
