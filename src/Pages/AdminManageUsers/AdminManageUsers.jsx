@@ -1,19 +1,48 @@
-import { useEffect, useState } from "react";
+
 import { Helmet } from "react-helmet-async";
 import axiosSecure from "../../API";
+import UseUser from "../../Hooks/UseUser";
+import Swal from "sweetalert2";
 
 const AdminManageUsers = () => {
-  const [userDetails, setUserDetails] = useState([]);
+  const [users, refetch] = UseUser();
 
-  useEffect(()=>{
-    axiosSecure.get('/users')
-    .then(res=>{
-      setUserDetails(res.data)
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  },[])
+  const handleDelete = (id)=>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        })
+      }
+    });
+  }
+
+  // const [userDetails, setUserDetails] = useState([]);
+
+  // useEffect(()=>{
+  //   axiosSecure.get('/users')
+  //   .then(res=>{
+  //     setUserDetails(res.data)
+  //   })
+  //   .catch((err)=>{
+  //     console.log(err);
+  //   })
+  // },[])
 
   return (
     <div>
@@ -36,12 +65,12 @@ const AdminManageUsers = () => {
               </thead>
               <tbody>
                 {
-                  userDetails.map(user=> <tr key={user._id}>
+                  users.map(user=> <tr key={user._id}>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.password}</td>
                     <th>
-                      <button className="bg-red-500 px-4 py-2 rounded-lg text-black hover:bg-white hover:cursor-pointer hover:duration-700">
+                      <button onClick={()=>handleDelete(user._id)} className="bg-red-500 px-4 py-2 rounded-lg text-black hover:bg-white hover:cursor-pointer hover:duration-700">
                         Remove The User
                       </button>
                     </th>
